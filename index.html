@@ -38,6 +38,9 @@
 
 <p>Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.</p>
 
+<h3>
+<a name="basics" class="anchor" href="#basics"><span class="octicon octicon-link"></span></a>Basics</h3>
+
 <p>The package hddtools can be installed via devtools:</p>
 
 <div class="highlight highlight-R"><pre><span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
@@ -56,10 +59,10 @@ install_github<span class="p">(</span><span class="s">"r_hddtools"</span><span c
 <p>The package hddtools contains a function to identify the updated Koppen-Greiger climate zone, given a bounding box.</p>
 
 <div class="highlight highlight-R"><pre><span class="c1"># Extract climate zones from Peel's map:</span>
-kgclimateclass<span class="p">(</span>BBlonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>BBlonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>BBlatMin<span class="o">=</span><span class="m">52.41</span><span class="p">,</span>BBlatMax<span class="o">=</span><span class="m">52.52</span><span class="p">,</span>updatedBy<span class="o">=</span><span class="s">"Peel"</span><span class="p">)</span>
+KGClimateClass<span class="p">(</span>lonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>lonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>latMin<span class="o">=</span><span class="m">52.41</span><span class="p">,</span>latMax<span class="o">=</span><span class="m">52.52</span><span class="p">,</span>updatedBy<span class="o">=</span><span class="s">"Peel"</span><span class="p">)</span>
 
 <span class="c1"># Extract climate zones from Kottek's map:</span>
-kgclimateclass<span class="p">(</span>BBlonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>BBlonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>BBlatMin<span class="o">=</span><span class="m">52.41</span><span class="p">,</span>BBlatMax<span class="o">=</span><span class="m">52.52</span><span class="p">,</span>updatedBy<span class="o">=</span><span class="s">"Kottek"</span><span class="p">)</span>
+KGClimateClass<span class="p">(</span>lonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>lonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>latMin<span class="o">=</span><span class="m">52.41</span><span class="p">,</span>latMax<span class="o">=</span><span class="m">52.52</span><span class="p">,</span>updatedBy<span class="o">=</span><span class="s">"Kottek"</span><span class="p">)</span>
 </pre></div>
 
 <h2>
@@ -70,17 +73,17 @@ kgclimateclass<span class="p">(</span>BBlonMin<span class="o">=</span><span clas
 <p>Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are open data and accessible via the hddtools.</p>
 
 <div class="highlight highlight-R"><pre><span class="c1"># 1. GRDC full catalogue</span>
-grdcCatalogue<span class="p">()</span>
+GRDCCatalogue<span class="p">()</span>
 
 <span class="c1"># 2. Filter GRDC catalogue based on a bounding box</span>
-grdcCatalogue<span class="p">(</span>BBlonMin <span class="o">=</span> <span class="m">-3.82</span><span class="p">,</span>
-              BBlonMax <span class="o">=</span> <span class="m">-3.63</span><span class="p">,</span>
-              BBlatMin <span class="o">=</span> <span class="m">52.43</span><span class="p">,</span>
-              BBlatMax <span class="o">=</span> <span class="m">52.52</span><span class="p">,</span>
+GRDCCatalogue<span class="p">(</span>lonMin <span class="o">=</span> <span class="m">-3.82</span><span class="p">,</span>
+              lonMax <span class="o">=</span> <span class="m">-3.63</span><span class="p">,</span>
+              latMin <span class="o">=</span> <span class="m">52.43</span><span class="p">,</span>
+              latMax <span class="o">=</span> <span class="m">52.52</span><span class="p">,</span>
               mdDescription <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 
 <span class="c1"># 3. Monthly data extraction</span>
-grdcMonthlyTS<span class="p">(</span><span class="m">1107700</span><span class="p">,</span>liveData<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+GRDCMonthlyTS<span class="p">(</span><span class="m">1107700</span><span class="p">,</span>liveData<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 
 <h2>
@@ -91,16 +94,16 @@ grdcMonthlyTS<span class="p">(</span><span class="m">1107700</span><span class="
 <p>The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.</p>
 
 <div class="highlight highlight-R"><pre><span class="c1"># 1a. Data60UK full catalogue</span>
-data60UKCatalogue<span class="p">()</span>
+Data60UKCatalogue<span class="p">()</span>
 
 <span class="c1"># 1.b Filter Data60UK catalogue based on bounding box</span>
-data60UKCatalogue<span class="p">(</span>BBlonMin <span class="o">=</span> <span class="m">-3.82</span><span class="p">,</span>
-                  BBlonMax <span class="o">=</span> <span class="m">-3.63</span><span class="p">,</span>
-                  BBlatMin <span class="o">=</span> <span class="m">52.43</span><span class="p">,</span>
-                  BBlatMax <span class="o">=</span> <span class="m">52.52</span><span class="p">)</span>
+Data60UKCatalogue<span class="p">(</span>lonMin <span class="o">=</span> <span class="m">-3.82</span><span class="p">,</span>
+                  lonMax <span class="o">=</span> <span class="m">-3.63</span><span class="p">,</span>
+                  latMin <span class="o">=</span> <span class="m">52.43</span><span class="p">,</span>
+                  latMax <span class="o">=</span> <span class="m">52.52</span><span class="p">)</span>
 
 <span class="c1"># 2. Extract time series </span>
-data60UKDailyTS<span class="p">(</span><span class="m">62001</span><span class="p">)</span>
+Data60UKDailyTS<span class="p">(</span><span class="m">62001</span><span class="p">)</span>
 </pre></div>
 
 <h2>
@@ -110,22 +113,22 @@ data60UKDailyTS<span class="p">(</span><span class="m">62001</span><span class="
 
 <p>The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.</p>
 
-<p>HDDTOOLS provides a function, called \verb|trmm|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
+<p>HDDTOOLS provides a function, called \verb|TRMM|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
 
 <div class="highlight highlight-R"><pre><span class="c1"># Retreive mean monthly recipitations from 3B43_V7 for 2012 (based on a bounding box)</span>
-trmm<span class="p">(</span>fileLocation<span class="o">=</span><span class="s">"~/"</span><span class="p">,</span>
+TRMM<span class="p">(</span>fileLocation<span class="o">=</span><span class="s">"~/"</span><span class="p">,</span>
      url<span class="o">=</span><span class="s">"ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/"</span><span class="p">,</span>
      product<span class="o">=</span><span class="s">"3B43"</span><span class="p">,</span>
      version<span class="o">=</span><span class="m">7</span><span class="p">,</span>
      year<span class="o">=</span><span class="m">2012</span><span class="p">,</span>
-     BBlonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>
-     BBlonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>
-     BBlatMin<span class="o">=</span><span class="m">52.43</span><span class="p">,</span>
-     BBlatMax<span class="o">=</span><span class="m">52.52</span><span class="p">)</span>
+     lonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>
+     lonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>
+     latMin<span class="o">=</span><span class="m">52.43</span><span class="p">,</span>
+     latMax<span class="o">=</span><span class="m">52.52</span><span class="p">)</span>
 </pre></div>
 
 <h1>
-<a name="leave-your-feedback" class="anchor" href="#leave-your-feedback"><span class="octicon octicon-link"></span></a>Leave your feedback</h1>
+<a name="please-leave-your-feedback" class="anchor" href="#please-leave-your-feedback"><span class="octicon octicon-link"></span></a>Please leave your feedback</h1>
 
 <p>I would greatly appreciate if you could leave your feedbacks either via email (<a href="mailto:cvitolodev@gmail.com">cvitolodev@gmail.com</a>) or taking a short survey (<a href="https://www.surveymonkey.com/s/QQ568FT">https://www.surveymonkey.com/s/QQ568FT</a>).</p>
         </section>
