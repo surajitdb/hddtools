@@ -32,113 +32,117 @@
 
         <section id="main_content">
           <h1>
-<a name="hydrological-data-discovery-tools" class="anchor" href="#hydrological-data-discovery-tools"><span class="octicon octicon-link"></span></a>Hydrological Data Discovery Tools</h1>
+<a id="hddtools-r-package" class="anchor" href="#hddtools-r-package" aria-hidden="true"><span class="octicon octicon-link"></span></a>HDDTOOLS (R package)</h1>
 
-<p>The R package ``hddtools'' is an open source project designed to facilitate non-programmatic access to online data sources. This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. </p>
+<p>HDDTOOLS stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to avariety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. </p>
+
+<p>This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. </p>
 
 <p>Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.</p>
 
 <h3>
-<a name="basics" class="anchor" href="#basics"><span class="octicon octicon-link"></span></a>Basics</h3>
+<a id="basics" class="anchor" href="#basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basics</h3>
 
 <p>The stable version (preferred option) of hddtools is available from CRAN (<a href="http://www.cran.r-project.org/web/packages/hddtools/index.html">http://www.cran.r-project.org/web/packages/hddtools/index.html</a>):</p>
 
-<div class="highlight highlight-R"><pre>install.packages<span class="p">(</span><span class="s">"hddtools"</span><span class="p">)</span>
-</pre></div>
+<div class="highlight highlight-R"><pre>install.packages(<span class="pl-s1"><span class="pl-pds">"</span>hddtools<span class="pl-pds">"</span></span>)</pre></div>
 
 <p>The development version is, instead, on github and can be installed via devtools:</p>
 
-<div class="highlight highlight-R"><pre><span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
-install_github<span class="p">(</span><span class="s">"r_hddtools"</span><span class="p">,</span> username <span class="o">=</span> <span class="s">"cvitolo"</span><span class="p">,</span> subdir <span class="o">=</span> <span class="s">"hddtools"</span><span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>hddtools<span class="p">)</span>
-</pre></div>
+<div class="highlight highlight-R"><pre>library(<span class="pl-vo">devtools</span>)
+install_github(<span class="pl-s1"><span class="pl-pds">"</span>cvitolo/r_hddtools<span class="pl-pds">"</span></span>, <span class="pl-v">subdir</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>hddtools<span class="pl-pds">"</span></span>)
+library(<span class="pl-vo">hddtools</span>)</pre></div>
+
+<p>Source the additional function GenerateMap():</p>
+
+<div class="highlight highlight-R"><pre>source_gist(<span class="pl-s1"><span class="pl-pds">"</span>https://gist.github.com/cvitolo/f9d12402956b88935c38<span class="pl-pds">"</span></span>)</pre></div>
 
 <h1>
-<a name="data-sources-and-functions" class="anchor" href="#data-sources-and-functions"><span class="octicon octicon-link"></span></a>Data sources and Functions</h1>
+<a id="data-sources-and-functions" class="anchor" href="#data-sources-and-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data sources and Functions</h1>
+
+<p>The functions provided can filter, slice and dice 2 and 3 dimensional information. </p>
+
+<div class="highlight highlight-R"><pre><span class="pl-c"># Define a bounding box</span>
+<span class="pl-vo">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-st">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">1</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">51</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-c1">0</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">52</span>)
+
+<span class="pl-c"># Define a temporal extent</span>
+<span class="pl-vo">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s1"><span class="pl-pds">"</span>2012-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s1"><span class="pl-pds">"</span>2012-12-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>days<span class="pl-pds">"</span></span>)</pre></div>
 
 <h2>
-<a name="the-koppen-climate-classification-map" class="anchor" href="#the-koppen-climate-classification-map"><span class="octicon octicon-link"></span></a>The Koppen Climate Classification map</h2>
+<a id="the-koppen-climate-classification-map" class="anchor" href="#the-koppen-climate-classification-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Koppen Climate Classification map</h2>
 
 <p>The Koppen Climate Classification is the most widely used system for classifying the world's climates. Its categories are based on the annual and monthly averages of temperature and precipitation. It was first updated by Rudolf Geiger in 1961, then by Kottek et al. (2006), Peel et al. (2007) and then by Rubel et al. (2010). </p>
 
 <p>The package hddtools contains a function to identify the updated Koppen-Greiger climate zone, given a bounding box.</p>
 
-<div class="highlight highlight-R"><pre><span class="c1"># Extract climate zones from Peel's map:</span>
-KGClimateClass<span class="p">(</span>lonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>lonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>latMin<span class="o">=</span><span class="m">52.41</span><span class="p">,</span>latMax<span class="o">=</span><span class="m">52.52</span><span class="p">,</span>updatedBy<span class="o">=</span><span class="s">"Peel"</span><span class="p">)</span>
+<div class="highlight highlight-R"><pre><span class="pl-c"># Extract climate zones from Peel's map:</span>
+KGClimateClass(<span class="pl-vo">bbox</span>,<span class="pl-v">updatedBy</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>Peel<span class="pl-pds">"</span></span>)
 
-<span class="c1"># Extract climate zones from Kottek's map:</span>
-KGClimateClass<span class="p">(</span>lonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>lonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>latMin<span class="o">=</span><span class="m">52.41</span><span class="p">,</span>latMax<span class="o">=</span><span class="m">52.52</span><span class="p">,</span>updatedBy<span class="o">=</span><span class="s">"Kottek"</span><span class="p">)</span>
-</pre></div>
+<span class="pl-c"># Extract climate zones from Kottek's map:</span>
+KGClimateClass(<span class="pl-vo">bbox</span>,<span class="pl-v">updatedBy</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>Kottek<span class="pl-pds">"</span></span>)</pre></div>
 
 <h2>
-<a name="the-global-runoff-data-centre" class="anchor" href="#the-global-runoff-data-centre"><span class="octicon octicon-link"></span></a>The Global Runoff Data Centre</h2>
+<a id="the-global-runoff-data-centre" class="anchor" href="#the-global-runoff-data-centre" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Global Runoff Data Centre</h2>
 
 <p>The Global Runoff Data Centre (GRDC) is an international archive hosted by the Federal Institute of Hydrology (Bundesanstalt für Gewässerkunde or BfG) in Koblenz, Germany. The Centre operates under the auspices of the World Meteorological Organisation and retains services and datasets for all the major rivers in the world.</p>
 
 <p>Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are open data and accessible via the hddtools.</p>
 
-<div class="highlight highlight-R"><pre><span class="c1"># 1. GRDC full catalogue</span>
-GRDCCatalogue<span class="p">()</span>
+<div class="highlight highlight-R"><pre><span class="pl-c"># GRDC full catalogue</span>
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> GRDCCatalogue()
 
-<span class="c1"># 2. Filter GRDC catalogue based on a bounding box</span>
-GRDCCatalogue<span class="p">(</span>lonMin <span class="o">=</span> <span class="m">-3.82</span><span class="p">,</span>
-              lonMax <span class="o">=</span> <span class="m">-3.63</span><span class="p">,</span>
-              latMin <span class="o">=</span> <span class="m">52.43</span><span class="p">,</span>
-              latMax <span class="o">=</span> <span class="m">52.52</span><span class="p">,</span>
-              mdDescription <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="pl-c"># Filter GRDC catalogue based on a bounding box</span>
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> GRDCCatalogue(<span class="pl-v">bbox</span><span class="pl-k">=</span><span class="pl-vo">bbox</span>, <span class="pl-v">metadataColumn</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>statistics<span class="pl-pds">"</span></span>, <span class="pl-v">entryValue</span><span class="pl-k">=</span><span class="pl-c1">1</span>)
 
-<span class="c1"># 3. Monthly data extraction</span>
-GRDCMonthlyTS<span class="p">(</span><span class="m">1107700</span><span class="p">)</span>
-</pre></div>
+<span class="pl-c"># Plot a map</span>
+GenerateMap(<span class="pl-vo">x</span>)
+
+<span class="pl-c"># Monthly data extraction</span>
+<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> GRDCMonthlyTS(<span class="pl-v">stationID</span><span class="pl-k">=</span><span class="pl-vo">x</span><span class="pl-k">$</span><span class="pl-vo">grdc_no</span>[[<span class="pl-c1">1</span>]], <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
 
 <h2>
-<a name="the-data60uk-dataset" class="anchor" href="#the-data60uk-dataset"><span class="octicon octicon-link"></span></a>The Data60UK dataset</h2>
+<a id="the-data60uk-dataset" class="anchor" href="#the-data60uk-dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Data60UK dataset</h2>
 
 <p>In the decade 2003-2012, the IAHS Predictions in Ungauged Basins (PUB) international Top-Down modelling Working Group (TDWG) collated daily datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales. The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge. </p>
 
 <p>The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.</p>
 
-<div class="highlight highlight-R"><pre><span class="c1"># 1a. Data60UK full catalogue</span>
-Data60UKCatalogue<span class="p">()</span>
+<div class="highlight highlight-R"><pre><span class="pl-c"># Data60UK full catalogue</span>
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> Data60UKCatalogue()
 
-<span class="c1"># 1.b Filter Data60UK catalogue based on bounding box</span>
-Data60UKCatalogue<span class="p">(</span>lonMin <span class="o">=</span> <span class="m">-3.82</span><span class="p">,</span>
-                  lonMax <span class="o">=</span> <span class="m">-3.63</span><span class="p">,</span>
-                  latMin <span class="o">=</span> <span class="m">52.43</span><span class="p">,</span>
-                  latMax <span class="o">=</span> <span class="m">52.52</span><span class="p">)</span>
+<span class="pl-c"># Filter Data60UK catalogue based on bounding box</span>
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> Data60UKCatalogue(<span class="pl-vo">bbox</span>)
 
-<span class="c1"># 2. Extract time series </span>
-Data60UKDailyTS<span class="p">(</span><span class="m">62001</span><span class="p">)</span>
-</pre></div>
+<span class="pl-c"># Plot a map</span>
+GenerateMap(<span class="pl-vo">x</span>)
+
+<span class="pl-c"># Extract time series </span>
+<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> Data60UKDailyTS(<span class="pl-c1">62001</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
 
 <h2>
-<a name="nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version" class="anchor" href="#nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version"><span class="octicon octicon-link"></span></a>NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)</h2>
+<a id="nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version" class="anchor" href="#nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)</h2>
 
 <p>The Tropical Rainfall Measuring Mission (TRMM) is a joint mission between NASA and the Japan Aerospace Exploration Agency (JAXA) that uses a research satellite to measure precipitation within the tropics in order to improve our understanding of climate and its variability.</p>
 
 <p>The TRMM satellite records global historical rainfall estimation in a gridded format since 1998 with a daily temporal resolution and a spatial resolution of 0.25 degrees. This information is openly available for educational purposes and downloadable from an FTP server.</p>
 
-<p>HDDTOOLS provides a function, called \verb|TRMM|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
+<p>The hddtools provides a function, called \verb|TRMM()|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
 
-<div class="highlight highlight-R"><pre><span class="c1"># Retreive mean monthly recipitations from 3B43_V7 for 2012 (based on a bounding box)</span>
-TRMM<span class="p">(</span>fileLocation<span class="o">=</span><span class="s">"~/"</span><span class="p">,</span>
-     url<span class="o">=</span><span class="s">"ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/"</span><span class="p">,</span>
-     product<span class="o">=</span><span class="s">"3B43"</span><span class="p">,</span>
-     version<span class="o">=</span><span class="m">7</span><span class="p">,</span>
-     year<span class="o">=</span><span class="m">2012</span><span class="p">,</span>
-     lonMin<span class="o">=</span><span class="m">-3.82</span><span class="p">,</span>
-     lonMax<span class="o">=</span><span class="m">-3.63</span><span class="p">,</span>
-     latMin<span class="o">=</span><span class="m">52.43</span><span class="p">,</span>
-     latMax<span class="o">=</span><span class="m">52.52</span><span class="p">)</span>
-</pre></div>
+<div class="highlight highlight-R"><pre><span class="pl-c"># Retreive mean monthly recipitations from 3B43_V7 for 2012 (based on a bounding box)</span>
+TRMM(<span class="pl-v">fileLocation</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>~/<span class="pl-pds">"</span></span>,
+     <span class="pl-v">url</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/<span class="pl-pds">"</span></span>,
+     <span class="pl-v">product</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>3B43<span class="pl-pds">"</span></span>,
+     <span class="pl-v">version</span><span class="pl-k">=</span><span class="pl-c1">7</span>,
+     <span class="pl-v">year</span><span class="pl-k">=</span><span class="pl-c1">2012</span>,
+     <span class="pl-vo">bbox</span>)</pre></div>
 
 <h3>
-<a name="warnings" class="anchor" href="#warnings"><span class="octicon octicon-link"></span></a>Warnings</h3>
+<a id="warnings" class="anchor" href="#warnings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Warnings</h3>
 
-<p>This package and functions herein are provided as is, without any guarantee.</p>
+<p>This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.</p>
 
 <h1>
-<a name="please-leave-your-feedback" class="anchor" href="#please-leave-your-feedback"><span class="octicon octicon-link"></span></a>Please leave your feedback</h1>
+<a id="please-leave-your-feedback" class="anchor" href="#please-leave-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Please leave your feedback</h1>
 
 <p>I would greatly appreciate if you could leave your feedbacks either via email (<a href="mailto:cvitolodev@gmail.com">cvitolodev@gmail.com</a>) or taking a short survey (<a href="https://www.surveymonkey.com/s/QQ568FT">https://www.surveymonkey.com/s/QQ568FT</a>).</p>
         </section>
