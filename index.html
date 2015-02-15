@@ -34,14 +34,19 @@
           <h1>
 <a id="hddtools-r-package" class="anchor" href="#hddtools-r-package" aria-hidden="true"><span class="octicon octicon-link"></span></a>HDDTOOLS (R package)</h1>
 
+<p><a href="http://dx.doi.org/10.5281/zenodo.14721"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.14721.svg" alt="DOI"></a></p>
+
 <p>HDDTOOLS stands for Hydrological Data Discovery Tools. This R package is an open source project designed to facilitate non-programmatic access to avariety of online open data sources relevant for hydrologists and, more in general, environmental scientists and practitioners. </p>
 
 <p>This typically implies the download of a metadata catalogue, selection of information needed, formal request for dataset(s), de-compression, conversion, manual filtering and parsing. All those operation are made more efficient by re-usable functions. </p>
 
 <p>Depending on the data license, functions can provide offline and/or online modes. When redistribution is allowed, for instance, a copy of the dataset is cached within the package and updated twice a year. This is the fastest option and also allows offline use of package's functions. When re-distribution is not allowed, only online mode is provided.</p>
 
-<h3>
-<a id="basics" class="anchor" href="#basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basics</h3>
+<p><strong>To cite this software:</strong><br>
+C. Vitolo, Hydrological Data Discovery Tools (hddtools, R package), (2015), GitHub repository, <a href="https://github.com/cvitolo/r_hddtools">https://github.com/cvitolo/r_hddtools</a>, doi: <a href="http://dx.doi.org/10.5281/zenodo.14721">http://dx.doi.org/10.5281/zenodo.14721</a></p>
+
+<h1>
+<a id="basics" class="anchor" href="#basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basics</h1>
 
 <p>The stable version (preferred option) of hddtools is available from CRAN (<a href="http://www.cran.r-project.org/web/packages/hddtools/index.html">http://www.cran.r-project.org/web/packages/hddtools/index.html</a>):</p>
 
@@ -63,10 +68,10 @@ library(<span class="pl-vo">hddtools</span>)</pre></div>
 <p>The functions provided can filter, slice and dice 2 and 3 dimensional information. </p>
 
 <div class="highlight highlight-R"><pre><span class="pl-c"># Define a bounding box</span>
-<span class="pl-vo">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-st">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">1</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">51</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-c1">0</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">52</span>)
+<span class="pl-vo">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-st">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">10</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">48</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-c1">5</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">62</span>)
 
 <span class="pl-c"># Define a temporal extent</span>
-<span class="pl-vo">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s1"><span class="pl-pds">"</span>2012-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s1"><span class="pl-pds">"</span>2012-12-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>days<span class="pl-pds">"</span></span>)</pre></div>
+<span class="pl-vo">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s1"><span class="pl-pds">"</span>2012-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s1"><span class="pl-pds">"</span>2012-01-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>months<span class="pl-pds">"</span></span>)</pre></div>
 
 <h2>
 <a id="the-koppen-climate-classification-map" class="anchor" href="#the-koppen-climate-classification-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Koppen Climate Classification map</h2>
@@ -89,16 +94,16 @@ KGClimateClass(<span class="pl-vo">bbox</span>,<span class="pl-v">updatedBy</spa
 <p>Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are open data and accessible via the hddtools.</p>
 
 <div class="highlight highlight-R"><pre><span class="pl-c"># GRDC full catalogue</span>
-<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> GRDCCatalogue()
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> GRDC_Catalogue()
 
 <span class="pl-c"># Filter GRDC catalogue based on a bounding box</span>
-<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> GRDCCatalogue(<span class="pl-v">bbox</span><span class="pl-k">=</span><span class="pl-vo">bbox</span>, <span class="pl-v">metadataColumn</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>statistics<span class="pl-pds">"</span></span>, <span class="pl-v">entryValue</span><span class="pl-k">=</span><span class="pl-c1">1</span>)
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> GRDC_Catalogue(<span class="pl-v">bbox</span><span class="pl-k">=</span><span class="pl-vo">bbox</span>, <span class="pl-v">metadataColumn</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>statistics<span class="pl-pds">"</span></span>, <span class="pl-v">entryValue</span><span class="pl-k">=</span><span class="pl-c1">1</span>)
 
 <span class="pl-c"># Plot a map</span>
 GenerateMap(<span class="pl-vo">x</span>)
 
 <span class="pl-c"># Monthly data extraction</span>
-<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> GRDCMonthlyTS(<span class="pl-v">stationID</span><span class="pl-k">=</span><span class="pl-vo">x</span><span class="pl-k">$</span><span class="pl-vo">grdc_no</span>[[<span class="pl-c1">1</span>]], <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
+<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> GRDC_TS(<span class="pl-v">stationID</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>6122300<span class="pl-pds">"</span></span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
 
 <h2>
 <a id="nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version" class="anchor" href="#nasas-tropical-rainfall-measuring-mission-trmm-only-available-for-github-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>NASA's Tropical Rainfall Measuring Mission (TRMM, only available for github version)</h2>
@@ -109,13 +114,8 @@ GenerateMap(<span class="pl-vo">x</span>)
 
 <p>The hddtools provides a function, called \verb|TRMM()|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># Retreive mean monthly recipitations from 3B43_V7 for 2012 (based on a bounding box)</span>
-TRMM(<span class="pl-v">fileLocation</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>~/<span class="pl-pds">"</span></span>,
-     <span class="pl-v">url</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>ftp://disc2.nascom.nasa.gov/data/TRMM/Gridded/<span class="pl-pds">"</span></span>,
-     <span class="pl-v">product</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>3B43<span class="pl-pds">"</span></span>,
-     <span class="pl-v">version</span><span class="pl-k">=</span><span class="pl-c1">7</span>,
-     <span class="pl-v">year</span><span class="pl-k">=</span><span class="pl-c1">2012</span>,
-     <span class="pl-vo">bbox</span>)</pre></div>
+<div class="highlight highlight-R"><pre><span class="pl-c"># Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)</span>
+TRMM(<span class="pl-vo">bbox</span>,<span class="pl-vo">timeExtent</span>)</pre></div>
 
 <h2>
 <a id="top-down-modelling-working-group" class="anchor" href="#top-down-modelling-working-group" aria-hidden="true"><span class="octicon octicon-link"></span></a>Top-Down modelling Working Group</h2>
@@ -128,17 +128,36 @@ TRMM(<span class="pl-v">fileLocation</span><span class="pl-k">=</span><span clas
 <p>US dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates throughout the world. </p>
 
 <div class="highlight highlight-R"><pre><span class="pl-c"># MOPEX full catalogue</span>
-<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> mopexCatalogue()
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> MOPEX_Catalogue()
 
 <span class="pl-c"># Extract time series </span>
-<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> mopexTS(<span class="pl-s1"><span class="pl-pds">"</span>14359000<span class="pl-pds">"</span></span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
+<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> MOPEX_TS(<span class="pl-s1"><span class="pl-pds">"</span>14359000<span class="pl-pds">"</span></span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
 
 <span class="pl-c"># Extract time series for a specified teporal window</span>
 <span class="pl-vo">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s1"><span class="pl-pds">"</span>1948-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s1"><span class="pl-pds">"</span>1949-12-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">"</span>days<span class="pl-pds">"</span></span>)
-<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> mopexTS(<span class="pl-s1"><span class="pl-pds">"</span>14359000<span class="pl-pds">"</span></span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-vo">timeExtent</span>)</pre></div>
+<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> MOPEX_TS(<span class="pl-s1"><span class="pl-pds">"</span>14359000<span class="pl-pds">"</span></span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-vo">timeExtent</span>)</pre></div>
 
-<h3>
-<a id="warnings" class="anchor" href="#warnings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Warnings</h3>
+<h2>
+<a id="sepa-river-level-data" class="anchor" href="#sepa-river-level-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>SEPA river level data</h2>
+
+<p>The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: <a href="http://pennine.ddns.me.uk/riverlevels/ConciseList.html">http://pennine.ddns.me.uk/riverlevels/ConciseList.html</a>). </p>
+
+<div class="highlight highlight-R"><pre><span class="pl-c"># SEPA unofficial catalogue</span>
+<span class="pl-vo">x</span> <span class="pl-k">&lt;-</span> SEPA_Catalogue()</pre></div>
+
+<p>The time series of the last few days is available from SEPA website and downloadable using the following function:</p>
+
+<div class="highlight highlight-R"><pre><span class="pl-c"># Single time series extraction</span>
+<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> SEPA_TS(<span class="pl-v">hydroRefNumber</span><span class="pl-k">=</span><span class="pl-c1">234253</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
+
+<span class="pl-c"># Multiple time series extraction</span>
+<span class="pl-vo">y</span> <span class="pl-k">&lt;-</span> SEPA_TS(<span class="pl-v">hydroRefNumber</span><span class="pl-k">=</span>c(<span class="pl-c1">234253</span>,<span class="pl-c1">234174</span>,<span class="pl-c1">234305</span>))
+plot(<span class="pl-vo">y</span>[[<span class="pl-c1">1</span>]])
+plot(<span class="pl-vo">y</span>[[<span class="pl-c1">2</span>]])
+plot(<span class="pl-vo">y</span>[[<span class="pl-c1">3</span>]])</pre></div>
+
+<h1>
+<a id="warnings" class="anchor" href="#warnings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Warnings</h1>
 
 <p>This package and functions herein are part of an experimental open-source project. They are provided as is, without any guarantee.</p>
 
