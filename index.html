@@ -48,26 +48,32 @@ Vitolo C., Hydrological Data Discovery Tools (hddtools, R package), (2014), GitH
 <h1>
 <a id="basics" class="anchor" href="#basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basics</h1>
 
+<p>First, install all the dependencies:</p>
+
+<div class="highlight highlight-source-r"><pre>install.packages(c(<span class="pl-s"><span class="pl-pds">"</span>sp<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>rgdal<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>raster<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>RCurl<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>XML<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>zoo<span class="pl-pds">"</span></span>,
+                   <span class="pl-s"><span class="pl-pds">"</span>devtools<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>XML2R<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>rjson<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>stringr<span class="pl-pds">"</span></span>))
+library(<span class="pl-smi">devtools</span>)
+install_github(<span class="pl-s"><span class="pl-pds">"</span>cvitolo/r_rnrfa<span class="pl-pds">"</span></span>, <span class="pl-v">subdir</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>rnrfa<span class="pl-pds">"</span></span>)</pre></div>
+
 <p>The stable version (preferred option) of hddtools is available from CRAN (<a href="http://www.cran.r-project.org/web/packages/hddtools/index.html">http://www.cran.r-project.org/web/packages/hddtools/index.html</a>):</p>
 
-<div class="highlight highlight-R"><pre>install.packages(<span class="pl-s"><span class="pl-pds">"</span>hddtools<span class="pl-pds">"</span></span>)</pre></div>
+<div class="highlight highlight-source-r"><pre>install.packages(<span class="pl-s"><span class="pl-pds">"</span>hddtools<span class="pl-pds">"</span></span>)</pre></div>
 
 <p>The development version is, instead, on github and can be installed via devtools:</p>
 
-<div class="highlight highlight-R"><pre>library(<span class="pl-smi">devtools</span>)
-install_github(<span class="pl-s"><span class="pl-pds">"</span>cvitolo/r_hddtools<span class="pl-pds">"</span></span>, <span class="pl-v">subdir</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>hddtools<span class="pl-pds">"</span></span>)
+<div class="highlight highlight-source-r"><pre>install_github(<span class="pl-s"><span class="pl-pds">"</span>cvitolo/r_hddtools<span class="pl-pds">"</span></span>, <span class="pl-v">subdir</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>hddtools<span class="pl-pds">"</span></span>)
 library(<span class="pl-smi">hddtools</span>)</pre></div>
 
 <p>Source the additional function GenerateMap():</p>
 
-<div class="highlight highlight-R"><pre>source_gist(<span class="pl-s"><span class="pl-pds">"</span>https://gist.github.com/cvitolo/f9d12402956b88935c38<span class="pl-pds">"</span></span>)</pre></div>
+<div class="highlight highlight-source-r"><pre>source_gist(<span class="pl-s"><span class="pl-pds">"</span>https://gist.github.com/cvitolo/f9d12402956b88935c38<span class="pl-pds">"</span></span>)</pre></div>
 
 <h1>
 <a id="data-sources-and-functions" class="anchor" href="#data-sources-and-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data sources and Functions</h1>
 
 <p>The functions provided can filter, slice and dice 2 and 3 dimensional information. </p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># Define a bounding box</span>
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Define a bounding box</span>
 <span class="pl-smi">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-k">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">10</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">48</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-c1">5</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">62</span>)
 
 <span class="pl-c"># Define a temporal extent</span>
@@ -80,7 +86,7 @@ library(<span class="pl-smi">hddtools</span>)</pre></div>
 
 <p>The package hddtools contains a function to identify the updated Koppen-Greiger climate zone, given a bounding box.</p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># Extract climate zones from Peel's map:</span>
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Extract climate zones from Peel's map:</span>
 KGClimateClass(<span class="pl-smi">bbox</span>,<span class="pl-v">updatedBy</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Peel<span class="pl-pds">"</span></span>)
 
 <span class="pl-c"># Extract climate zones from Kottek's map:</span>
@@ -93,7 +99,7 @@ KGClimateClass(<span class="pl-smi">bbox</span>,<span class="pl-v">updatedBy</sp
 
 <p>Catalogue, kml files and the product ``Long-Term Mean Monthly Discharges'' are open data and accessible via the hddtools.</p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># GRDC full catalogue</span>
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># GRDC full catalogue</span>
 <span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> GRDC_Catalogue()
 
 <span class="pl-c"># Filter GRDC catalogue based on a bounding box</span>
@@ -114,8 +120,12 @@ GenerateMap(<span class="pl-smi">x</span>)
 
 <p>The hddtools provides a function, called \verb|TRMM()|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)</span>
-TRMM(<span class="pl-smi">bbox</span>,<span class="pl-smi">timeExtent</span>)</pre></div>
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)</span>
+TRMM(<span class="pl-smi">bbox</span>,<span class="pl-smi">timeExtent</span>)
+plot(raster(<span class="pl-s"><span class="pl-pds">"</span>~/trmm_acc.tif<span class="pl-pds">"</span></span>))
+<span class="pl-c"># or</span>
+<span class="pl-smi">b</span> <span class="pl-k">&lt;-</span> brick(<span class="pl-s"><span class="pl-pds">"</span>~/trmm_acc.tif<span class="pl-pds">"</span></span>)
+plot(<span class="pl-smi">b</span>)</pre></div>
 
 <h2>
 <a id="top-down-modelling-working-group" class="anchor" href="#top-down-modelling-working-group" aria-hidden="true"><span class="octicon octicon-link"></span></a>Top-Down modelling Working Group</h2>
@@ -123,17 +133,41 @@ TRMM(<span class="pl-smi">bbox</span>,<span class="pl-smi">timeExtent</span>)</p
 <p>The Top-Down modelling Working Group (TDWG) for the Prediction in Ungauged Basins (PUB) Decade (2003-2012) is an initiative of the International Association of Hydrological Sciences (IAHS) which collected datasets for hydrological modelling free-of-charge, available <a href="http://tdwg.catchment.org/datasets.html">here</a>. This package provides a common interface to retrieve, browse and filter information.</p>
 
 <h3>
+<a id="the-data60uk-dataset-this-wont-work-as-the-server-is-down-from-december-2014" class="anchor" href="#the-data60uk-dataset-this-wont-work-as-the-server-is-down-from-december-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Data60UK dataset (This won't work as the server is down from December 2014)</h3>
+
+<p>The Data60UK initiative collated datasets of areal precipitation and streamflow discharge across 61 gauging sites in England and Wales (UK). The database was prepared from source databases for research purposes, with the intention to make it re-usable. This is now available in the public domain free of charge. </p>
+
+<p>The hddtools contain two functions to interact with this database: one to retreive the catalogue and another to retreive time series of areal precipitation and streamflow discharge.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Data60UK full catalogue</span>
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> Data60UKCatalogue()
+
+<span class="pl-c"># Filter Data60UK catalogue based on bounding box</span>
+<span class="pl-smi">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-k">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">3.82</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">52.41</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">3.63</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">52.52</span>)
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> Data60UKCatalogue(<span class="pl-smi">bbox</span>)
+
+<span class="pl-c"># Plot a map</span>
+GenerateMap(<span class="pl-smi">x</span>)
+
+<span class="pl-c"># Extract time series </span>
+<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> Data60UKDailyTS(<span class="pl-c1">39015</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
+
+<span class="pl-c"># Extract time series for a specified teporal window</span>
+<span class="pl-smi">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s"><span class="pl-pds">"</span>1988-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s"><span class="pl-pds">"</span>1989-12-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>days<span class="pl-pds">"</span></span>)
+<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> Data60UKDailyTS(<span class="pl-c1">39015</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-smi">timeExtent</span>)</pre></div>
+
+<h3>
 <a id="mopex" class="anchor" href="#mopex" aria-hidden="true"><span class="octicon octicon-link"></span></a>MOPEX</h3>
 
 <p>US dataset containing historical hydrometeorological data and river basin characteristics for hundreds of river basins from a range of climates throughout the world. </p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># MOPEX full catalogue</span>
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># MOPEX full catalogue</span>
 <span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> MOPEX_Catalogue()
 
 <span class="pl-c"># Extract time series </span>
 <span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> MOPEX_TS(<span class="pl-s"><span class="pl-pds">"</span>14359000<span class="pl-pds">"</span></span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
 
-<span class="pl-c"># Extract time series for a specified teporal window</span>
+<span class="pl-c"># Extract time series for a specified temporal window</span>
 <span class="pl-smi">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s"><span class="pl-pds">"</span>1948-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s"><span class="pl-pds">"</span>1949-12-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>days<span class="pl-pds">"</span></span>)
 <span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> MOPEX_TS(<span class="pl-s"><span class="pl-pds">"</span>14359000<span class="pl-pds">"</span></span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-smi">timeExtent</span>)</pre></div>
 
@@ -142,12 +176,12 @@ TRMM(<span class="pl-smi">bbox</span>,<span class="pl-smi">timeExtent</span>)</p
 
 <p>The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: <a href="http://pennine.ddns.me.uk/riverlevels/ConciseList.html">http://pennine.ddns.me.uk/riverlevels/ConciseList.html</a>). </p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># SEPA unofficial catalogue</span>
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># SEPA unofficial catalogue</span>
 <span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> SEPA_Catalogue()</pre></div>
 
 <p>The time series of the last few days is available from SEPA website and downloadable using the following function:</p>
 
-<div class="highlight highlight-R"><pre><span class="pl-c"># Single time series extraction</span>
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Single time series extraction</span>
 <span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> SEPA_TS(<span class="pl-v">hydroRefNumber</span><span class="pl-k">=</span><span class="pl-c1">234253</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
 
 <span class="pl-c"># Multiple time series extraction</span>
