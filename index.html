@@ -55,7 +55,7 @@ Vitolo C., Hydrological Data Discovery Tools (hddtools, R package), (2014), GitH
 library(<span class="pl-smi">devtools</span>)
 install_github(<span class="pl-s"><span class="pl-pds">"</span>cvitolo/r_rnrfa<span class="pl-pds">"</span></span>, <span class="pl-v">subdir</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>rnrfa<span class="pl-pds">"</span></span>)</pre></div>
 
-<p>The stable version (preferred option) of hddtools is available from CRAN (<a href="http://www.cran.r-project.org/web/packages/hddtools/index.html">http://www.cran.r-project.org/web/packages/hddtools/index.html</a>):</p>
+<p>The stable version (preferred option) of hddtools is available from CRAN:</p>
 
 <div class="highlight highlight-source-r"><pre>install.packages(<span class="pl-s"><span class="pl-pds">"</span>hddtools<span class="pl-pds">"</span></span>)</pre></div>
 
@@ -77,7 +77,7 @@ library(<span class="pl-smi">hddtools</span>)</pre></div>
 <span class="pl-smi">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-k">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">10</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">48</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-c1">5</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">62</span>)
 
 <span class="pl-c"># Define a temporal extent</span>
-<span class="pl-smi">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s"><span class="pl-pds">"</span>2012-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s"><span class="pl-pds">"</span>2012-01-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>months<span class="pl-pds">"</span></span>)</pre></div>
+<span class="pl-smi">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s"><span class="pl-pds">"</span>2012-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s"><span class="pl-pds">"</span>2012-03-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>months<span class="pl-pds">"</span></span>)</pre></div>
 
 <h2>
 <a id="the-koppen-climate-classification-map" class="anchor" href="#the-koppen-climate-classification-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Koppen Climate Classification map</h2>
@@ -121,9 +121,8 @@ GenerateMap(<span class="pl-smi">x</span>)
 <p>The hddtools provides a function, called \verb|TRMM()|, to download and convert a selected portion of the TRMM dataset into a raster-brick that can be opened in any GIS software.</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-c"># Retreive mean monthly precipitations from 3B43_V7 (based on a bounding box and time extent)</span>
-TRMM(<span class="pl-smi">bbox</span>,<span class="pl-smi">timeExtent</span>)
-plot(raster(<span class="pl-s"><span class="pl-pds">"</span>~/trmm_acc.tif<span class="pl-pds">"</span></span>))
-<span class="pl-c"># or</span>
+TRMM(<span class="pl-v">timeExtent</span> <span class="pl-k">=</span> <span class="pl-smi">timeExtent</span>, <span class="pl-v">bbox</span> <span class="pl-k">=</span> <span class="pl-smi">bbox</span>)
+library(<span class="pl-smi">raster</span>)
 <span class="pl-smi">b</span> <span class="pl-k">&lt;-</span> brick(<span class="pl-s"><span class="pl-pds">"</span>~/trmm_acc.tif<span class="pl-pds">"</span></span>)
 plot(<span class="pl-smi">b</span>)</pre></div>
 
@@ -143,18 +142,19 @@ plot(<span class="pl-smi">b</span>)</pre></div>
 <span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> Data60UKCatalogue()
 
 <span class="pl-c"># Filter Data60UK catalogue based on bounding box</span>
-<span class="pl-smi">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-k">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">3.82</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">52.41</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">3.63</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">52.52</span>)
+<span class="pl-smi">bbox</span> <span class="pl-k">&lt;-</span> <span class="pl-k">list</span>(<span class="pl-v">lonMin</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">4</span>,<span class="pl-v">latMin</span><span class="pl-k">=</span><span class="pl-c1">51</span>,<span class="pl-v">lonMax</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">3</span>,<span class="pl-v">latMax</span><span class="pl-k">=</span><span class="pl-c1">53</span>)
 <span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> Data60UKCatalogue(<span class="pl-smi">bbox</span>)
 
 <span class="pl-c"># Plot a map</span>
 GenerateMap(<span class="pl-smi">x</span>)
 
 <span class="pl-c"># Extract time series </span>
-<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> Data60UKDailyTS(<span class="pl-c1">39015</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
+<span class="pl-smi">hydroRefNumber</span> <span class="pl-k">&lt;-</span> as.numeric(as.character(<span class="pl-smi">x</span><span class="pl-k">$</span><span class="pl-smi">id</span>[<span class="pl-c1">1</span>])) <span class="pl-c"># e.g. 55012</span>
+<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> Data60UKDailyTS(<span class="pl-smi">hydroRefNumber</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
 
 <span class="pl-c"># Extract time series for a specified teporal window</span>
 <span class="pl-smi">timeExtent</span> <span class="pl-k">&lt;-</span> seq(as.Date(<span class="pl-s"><span class="pl-pds">"</span>1988-01-01<span class="pl-pds">"</span></span>), as.Date(<span class="pl-s"><span class="pl-pds">"</span>1989-12-31<span class="pl-pds">"</span></span>), <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>days<span class="pl-pds">"</span></span>)
-<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> Data60UKDailyTS(<span class="pl-c1">39015</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-smi">timeExtent</span>)</pre></div>
+<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> Data60UKDailyTS(<span class="pl-smi">hydroRefNumber</span>, <span class="pl-v">plotOption</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-smi">timeExtent</span>)</pre></div>
 
 <h3>
 <a id="mopex" class="anchor" href="#mopex" aria-hidden="true"><span class="octicon octicon-link"></span></a>MOPEX</h3>
@@ -189,6 +189,34 @@ GenerateMap(<span class="pl-smi">x</span>)
 plot(<span class="pl-smi">y</span>[[<span class="pl-c1">1</span>]])
 plot(<span class="pl-smi">y</span>[[<span class="pl-c1">2</span>]])
 plot(<span class="pl-smi">y</span>[[<span class="pl-c1">3</span>]])</pre></div>
+
+<h2>
+<a id="met-office-hadley-centre-observation-data-hadukp-data" class="anchor" href="#met-office-hadley-centre-observation-data-hadukp-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Met Office Hadley Centre Observation Data: HadUKP Data</h2>
+
+<p>The Met Office Hadley Centre provides daily precipitation time series averaged over UK regions and subregions. </p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Get the list of time series (11)</span>
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> HadDAILY()</pre></div>
+
+<p>Below is the list of names used to extract time series for regions/subregions:</p>
+
+<ul>
+<li>England &amp; Wales: EWP</li>
+<li>South East England: SEEP</li>
+<li>South West England &amp; Wales: SWEP</li>
+<li>Central England: CEP</li>
+<li>North West England &amp; Wales: NWEP</li>
+<li>North East England: NEEP</li>
+<li>Scotland: SP</li>
+<li>South Scotland: SSP</li>
+<li>North Scotland: NSP</li>
+<li>East Scotland: ESP</li>
+<li>Northern Ireland: NIP</li>
+</ul>
+
+<p>For example, here is how to plot the time series for England and Wales:</p>
+
+<div class="highlight highlight-source-r"><pre>plot(<span class="pl-smi">x</span><span class="pl-k">$</span><span class="pl-smi">EWP</span>)</pre></div>
 
 <h1>
 <a id="warnings" class="anchor" href="#warnings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Warnings</h1>
