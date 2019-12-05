@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data set: The SEPA Catalogue — SEPAcatalogue • hddtools</title>
+<title>Changelog • hddtools</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,7 @@
 
 
 
-<meta property="og:title" content="Data set: The SEPA Catalogue — SEPAcatalogue" />
-<meta property="og:description" content="The SEPA catalogue" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -56,7 +54,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,44 +118,132 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Data set: The SEPA Catalogue</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/hddtools/blob/master/R/hddtools-package.R'><code>R/hddtools-package.R</code></a></small>
-    <div class="hidden name"><code>SEPAcatalogue.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/ropensci/hddtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>The SEPA catalogue</p>
-    </div>
-
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"SEPAcatalogue"</span>)</pre>
-
-
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A data frame with 830 observations on the following 8 variables.</p><dl class='dl-horizontal'>
-  <dt><code>idNRFA</code></dt><dd><p>National River Flow Archive id number.</p></dd>
-  <dt><code>aspxpage</code></dt><dd><p>Environment Agency gauges id.</p></dd>
-  <dt><code>stationId</code></dt><dd><p>SEPA station id.</p></dd>
-  <dt><code>River</code></dt><dd><p>String describing the river's name.</p></dd>
-  <dt><code>Location</code></dt><dd><p>String describing the location.</p></dd>
-  <dt><code>GridRef</code></dt><dd><p>British National Grid Reference.</p></dd>
-  <dt><code>Operator</code></dt><dd><p>The operator's name.</p></dd>
-  <dt><code>CatchmentAreaKm2</code></dt><dd><p>Area of the catchment.</p></dd>
-
-</dl>
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='http://pennine.ddns.me.uk/riverlevels/ConciseList.html'>http://pennine.ddns.me.uk/riverlevels/ConciseList.html</a></p>
-
+    <div id="hddtools-0-8-2" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-8-2" class="anchor"></a>hddtools 0.8.2<small> 2018-08-09 </small>
+</h1>
+<ul>
+<li>Connection to TRMM database removed as the web service is no longer available.</li>
+<li>Fixed problem with Rd file which prevented the manual to be created.</li>
+<li>Fixed problem with URL in DESCRIPTION file</li>
+</ul>
+</div>
+    <div id="hddtools-0-8-1" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-8-1" class="anchor"></a>hddtools 0.8.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Any reference to TRMM database was removed as the web service is no longer available.</li>
+</ul>
+</div>
+    <div id="hddtools-0-8" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-8" class="anchor"></a>hddtools 0.8<small> Unreleased </small>
+</h1>
+<ul>
+<li>tsGRDC function: this function now returns 6 tables (see documentation) according to latest updates on the GRDC side.</li>
+<li>GRDC data catalogue was updated in October 2017.</li>
+</ul>
+</div>
+    <div id="hddtools-0-7" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-7" class="anchor"></a>hddtools 0.7<small> 2017-04-02 </small>
+</h1>
+<ul>
+<li>TRMM function: this function has been temporarily removed from hddtools v0.7 as the ftp at NASA containing the data has been migrated. A new function is under development.</li>
+</ul>
+</div>
+    <div id="hddtools-0-6" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-6" class="anchor"></a>hddtools 0.6<small> 2017-03-03 </small>
+</h1>
+<ul>
+<li>TRMM function: set method for download.file to “auto” and added to arguments</li>
+<li>TRMM function: downloaded files are in temporary folder</li>
+<li>TRMM function: removed inputfileLocation</li>
+<li>TRMM function: added support for 3B42</li>
+<li>HadDAILY function removed as the service is no longer available</li>
+<li>The output of catalogueGRDC() is now a tibble table</li>
+</ul>
+</div>
+    <div id="hddtools-0-5" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-5" class="anchor"></a>hddtools 0.5<small> 2017-02-04 </small>
+</h1>
+<ul>
+<li>Updated all the links to show the new repository (rOpenSci)</li>
+</ul>
+</div>
+    <div id="hddtools-0-4" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-4" class="anchor"></a>hddtools 0.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added a vignette</li>
+<li>Added paper for submission to JOSS</li>
+<li>Fixed bug with the TRMM function (for Windows users)</li>
+</ul>
+</div>
+    <div id="hddtools-0-3" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-3" class="anchor"></a>hddtools 0.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added unist tests (using testthat framework),</li>
+<li>Added Travis CI</li>
+<li>Added Appveyor</li>
+</ul>
+</div>
+    <div id="hddtools-0-2" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-2" class="anchor"></a>hddtools 0.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<p>Added functions to get data from the following source:</p>
+<ul>
+<li>TRMM</li>
+<li>DATA60UK</li>
+<li>MOPEX</li>
+<li>GRDC</li>
+<li>SEPA</li>
+<li>Met Office Hadley Centre</li>
+</ul>
+</li>
+</ul>
+</div>
+    <div id="hddtools-0-1" class="section level1">
+<h1 class="page-header">
+<a href="#hddtools-0-1" class="anchor"></a>hddtools 0.1<small> 2014-08-13 </small>
+</h1>
+<ul>
+<li>Initial release</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#source">Source</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#hddtools-0-8-2">0.8.2</a></li>
+        <li><a href="#hddtools-0-8-1">0.8.1</a></li>
+        <li><a href="#hddtools-0-8">0.8</a></li>
+        <li><a href="#hddtools-0-7">0.7</a></li>
+        <li><a href="#hddtools-0-6">0.6</a></li>
+        <li><a href="#hddtools-0-5">0.5</a></li>
+        <li><a href="#hddtools-0-4">0.4</a></li>
+        <li><a href="#hddtools-0-3">0.3</a></li>
+        <li><a href="#hddtools-0-2">0.2</a></li>
+        <li><a href="#hddtools-0-1">0.1</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
 

@@ -1,6 +1,6 @@
 pandoc: '2.2'
 pkgdown: 1.4.1.9000
-pkgdown_sha: 90572181f1ac83b56089ab14c16f4d9e063f216b
+pkgdown_sha: 891cd8be82e2fdebe9ef3b2623687f7ac26297f8
 articles:
   hddtools_vignette: hddtools_vignette.html
 
