@@ -85,7 +85,7 @@
       <h1>hddtools: Hydrological Data Discovery Tools</h1>
                         <h4 class="author">Claudia Vitolo</h4>
             
-            <h4 class="date">2019-12-05</h4>
+            <h4 class="date">2019-12-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/hddtools/blob/master/vignettes/hddtools_vignette.Rmd"><code>vignettes/hddtools_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>hddtools_vignette.Rmd</code></div>
@@ -239,22 +239,21 @@
 <div id="sepa-river-level-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sepa-river-level-data" class="anchor"></a>SEPA river level data</h3>
-<p>The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations was derived by an unofficial list (available here: <a href="http://pennine.ddns.me.uk/riverlevels/ConciseList.html" class="uri">http://pennine.ddns.me.uk/riverlevels/ConciseList.html</a>).</p>
+<p>The Scottish Environment Protection Agency (SEPA) manages river level data for hundreds of gauging stations in the UK. The catalogue of stations is derived from the list here: <a href="http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv" class="uri">http://apps.sepa.org.uk/database/riverlevels/SEPA_River_Levels_Web.csv</a>.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># SEPA unofficial catalogue</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">SEPA_catalogue_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/catalogueSEPA.html">catalogueSEPA</a></span>()</a></code></pre></div>
 <p>The time series of the last few days is available from SEPA website and can be downloaded using the following function:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># Single time series extraction</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">Kilphedir &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">stationID =</span> <span class="kw"><a href="../reference/catalogueSEPA.html">catalogueSEPA</a></span>()<span class="op">$</span>stationId[<span class="dv">1</span>], </a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">                    <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="kilphedir.png"></p>
-<p>Plese note that this data is updated every 15 minutes and the code will always generate different plots.</p>
+<a class="sourceLine" id="cb19-2" data-line-number="2">Perth &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">stationID =</span> <span class="kw"><a href="../reference/catalogueSEPA.html">catalogueSEPA</a></span>()<span class="op">$</span>LOCATION_CODE[<span class="dv">1</span>], <span class="dt">plotOption =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="hddtools_vignette_files/figure-html/SEPA2-1.png" width="672"></p>
+<p>Plese note that these data are updated every 15 minutes and the code will always generate different plots.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># Multiple time series extraction</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tsSEPA.html">tsSEPA</a></span>(<span class="dt">stationID =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"234253"</span>, <span class="st">"234174"</span>, <span class="st">"234305"</span>))</a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(y[[<span class="dv">1</span>]], <span class="dt">ylim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(y[[<span class="dv">1</span>]], y[[<span class="dv">2</span>]], y[[<span class="dv">3</span>]])), </a>
 <a class="sourceLine" id="cb20-4" data-line-number="4">     <span class="dt">xlab =</span> <span class="st">""</span>, <span class="dt">ylab =</span> <span class="st">"Water level [m]"</span>)</a>
 <a class="sourceLine" id="cb20-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span>(y[[<span class="dv">2</span>]], <span class="dt">col =</span> <span class="st">"red"</span>)</a>
 <a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span>(y[[<span class="dv">3</span>]], <span class="dt">col =</span> <span class="st">"blue"</span>)</a></code></pre></div>
-<p><img src="sepa.png"></p>
+<p><img src="hddtools_vignette_files/figure-html/SEPA3-1.png" width="672"></p>
 </div>
 </div>
 </div>
