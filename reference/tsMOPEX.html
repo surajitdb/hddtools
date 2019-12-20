@@ -36,7 +36,8 @@
 
 
 <meta property="og:title" content="Interface for the MOPEX database of Daily Time Series — tsMOPEX" />
-<meta property="og:description" content="This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations." />
+<meta property="og:description" content="This function extract the dataset containing daily rainfall and
+streamflow discharge at one of the MOPEX locations." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,7 +127,8 @@
     </div>
 
     <div class="ref-description">
-    <p>This function extract the dataset containing daily rainfall and streamflow discharge at one of the MOPEX locations.</p>
+    <p>This function extract the dataset containing daily rainfall and
+streamflow discharge at one of the MOPEX locations.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tsMOPEX</span>(<span class='no'>stationID</span>, <span class='kw'>plotOption</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeExtent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -140,17 +142,20 @@
     </tr>
     <tr>
       <th>plotOption</th>
-      <td><p>boolean to define whether to plot the results. By default this is set to TRUE.</p></td>
+      <td><p>boolean to define whether to plot the results. By default
+this is set to TRUE.</p></td>
     </tr>
     <tr>
       <th>timeExtent</th>
-      <td><p>is a vector of dates and times for which the data should be retrieved</p></td>
+      <td><p>is a vector of dates and times for which the data should be
+retrieved</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The function returns a data frame containing 2 time series (as zoo objects): "P" (precipitation) and "Q" (discharge).</p>
+    <p>The function returns a data frame containing 2 time series (as zoo
+objects): "P" (precipitation) and "Q" (discharge).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
