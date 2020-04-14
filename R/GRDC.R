@@ -38,21 +38,8 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Retrieve the whole catalogue
+#'   # Retrieve the catalogue
 #'   GRDC_catalogue_all <- catalogueGRDC()
-#'
-#'   # Define a bounding box
-#'   areaBox <- raster::extent(-3.82, -3.63, 52.41, 52.52)
-#'   # Filter the catalogue based on bounding box
-#'   GRDC_catalogue_bbox <- catalogueGRDC(areaBox = areaBox)
-#'
-#'   # Get only catchments with area above 5000 Km2
-#'   GRDC_catalogue_area <- catalogueGRDC(columnName = "area",
-#'                                        columnValue = ">= 5000")
-#'
-#'   # Get only catchments within river Thames
-#'   GRDC_catalogue_river <- catalogueGRDC(columnName = "river",
-#'                                         columnValue = "Thames")
 #' }
 #'
 
@@ -66,16 +53,13 @@ catalogueGRDC <- function() {
   tf <- tempfile(tmpdir = td, fileext = ".zip")
   
   # Retrieve the catalogue into the placeholder file
-  x <- RCurl::getBinaryURL(file_url, ftp.use.epsv = FALSE, crlf = TRUE)
-  writeBin(object = x, con = tf)
+  x <- curl::curl_download(url = file_url, destfile = tf)
   
   # Unzip the file to the temporary directory
   utils::unzip(tf, exdir = td, overwrite = TRUE)
   
-  xlxs_file <- list.files(path = td,
-                          pattern = "GRDC_Stations.xlsx", full.names = TRUE)
   # Read
-  GRDCcatalogue <- readxl::read_xlsx(path = xlxs_file,
+  GRDCcatalogue <- readxl::read_xlsx(path = file.path(td, "GRDC_Stations.xlsx"),
                                      sheet = "station_catalogue")
   
   # Cleanup
